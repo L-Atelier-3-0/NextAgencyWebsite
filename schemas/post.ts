@@ -1,4 +1,12 @@
-import {defineField, defineType} from 'sanity'
+import {defineField, defineType, PortableTextBlock, Image} from 'sanity'
+
+export type Post = {
+  title: string,
+  slug: string,
+  author?: string,
+  imageUrl?: string,
+  body: PortableTextBlock
+}
 
 export default defineType({
   name: 'post',
