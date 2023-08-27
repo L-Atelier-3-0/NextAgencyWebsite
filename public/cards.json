@@ -1,0 +1,44 @@
+[
+  {
+    "type": "service",
+    "title": "Web Development",
+    "description": "I can build a website for you using the latest web technologies.",
+    "image": "/services/sites-internet.png"
+  },
+  {
+    "type": "service",
+    "title": "Web Development",
+    "description": "I can build a website for you using the latest web technologies.",
+    "image": "/services/sites-internet.png"
+  },
+  {
+    "type": "service",
+    "title": "Web Development",
+    "description": "I can build a website for you using the latest web technologies.",
+    "image": "/services/sites-internet.png"
+  },
+  {
+    "type": "why-us",
+    "title": "Web Development",
+    "description": "I can build a website for you using the latest web technologies.",
+    "image": "/why-uss/sites-internet.png"
+  },
+  {
+    "type": "why-us",
+    "title": "Web Development",
+    "description": "I can build a website for you using the latest web technologies.",
+    "image": "/why-uss/sites-internet.png"
+  },
+  {
+    "type": "why-us",
+    "title": "Web Development",
+    "description": "I can build a website for you using the latest web technologies.",
+    "image": "/why-uss/sites-internet.png"
+  },
+  {
+    "type": "why-us",
+    "title": "Web Development",
+    "description": "I can build a website for you using the latest web technologies.",
+    "image": "/why-uss/sites-internet.png"
+  }
+]
