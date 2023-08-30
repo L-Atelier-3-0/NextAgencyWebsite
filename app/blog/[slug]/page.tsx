@@ -14,7 +14,7 @@ export default async function Article({ params }: { params: { slug: string } }) 
     
     return <DefaultLayout>
         <div className={`h-96 flex justify-center items-center relative overflow-hidden`}>
-            <Image src={post.imageUrl ?? ''} width={1920} height={300} alt={post.title} className="absolute inset-0 w-full h-full object-cover -z-[1] blur-lg scale-110"/>
+            <Image src={post.imageUrl ?? '/default-banner.jpg'} width={1920} height={300} alt={post.title} className="absolute inset-0 w-full h-full object-cover -z-[1] blur-lg scale-110"/>
             <h1 className='text-6xl lg:text-9xl font-black text-textLight'>{post.title}</h1>
         </div>
         <BlogProgressBar/>

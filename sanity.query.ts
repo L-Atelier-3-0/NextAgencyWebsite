@@ -7,8 +7,8 @@ export async function getPosts() {
       _id,
       title,
       "slug": slug.current,
-      author,
-      body,
+      tags,
+      abstract,
       "imageUrl": mainImage.asset->url
     }`
   );
@@ -20,9 +20,9 @@ export async function getPost(slug: string) {
         _id,
         title,
         "slug": slug.current,
-        author,
+        tags,
         body,
-        "imageUrl": mainImage.asset->url
+        "bannerUrl": bannerImage.asset->url
       }`,
     {
       slug,

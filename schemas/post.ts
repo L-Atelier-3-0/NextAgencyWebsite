@@ -3,9 +3,11 @@ import {defineField, defineType, PortableTextBlock, Image} from 'sanity'
 export type Post = {
   title: string,
   slug: string,
-  author?: string,
+  tags: string[],
   imageUrl?: string,
-  body: PortableTextBlock
+  bannerUrl?: string,
+  body: PortableTextBlock,
+  abstract: string,
 }
 
 export default defineType({
@@ -28,14 +30,25 @@ export default defineType({
       },
     }),
     defineField({
-      name: 'author',
-      title: 'Author',
-      type: 'reference',
-      to: {type: 'author'},
+      name: 'tags',
+      title: 'Tags',
+      type: 'array',
+      of: [{type: 'string'}],
+      options: {
+        layout: 'tags'
+      }
     }),
     defineField({
       name: 'mainImage',
       title: 'Main image',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+    }),
+    defineField({
+      name: 'bannerImage',
+      title: 'Banner image',
       type: 'image',
       options: {
         hotspot: true,
@@ -51,11 +64,19 @@ export default defineType({
       name: 'publishedAt',
       title: 'Published at',
       type: 'datetime',
+      hidden: true,
     }),
     defineField({
       name: 'body',
       title: 'Body',
       type: 'blockContent',
+      validation: Rule => Rule.required().warning('Missing body text'),
+    }),
+    defineField({
+      name: 'abstract',
+      title: 'Abstract',
+      type: 'text',
+      validation: Rule => Rule.required().warning('Missing abstract text').max(150).warning('Abstract should be max 150 characters'),
     }),
   ],
 
@@ -64,10 +85,6 @@ export default defineType({
       title: 'title',
       author: 'author.name',
       media: 'mainImage',
-    },
-    prepare(selection) {
-      const {author} = selection
-      return {...selection, subtitle: author && `by ${author}`}
-    },
-  },
+    }
+  }
 })
