@@ -9,7 +9,13 @@ export async function getPosts() {
       "slug": slug.current,
       tags,
       abstract,
-      "imageUrl": mainImage.asset->url
+      "imageUrl": mainImage.asset->url,
+      publishedAt,
+      "bodyLengths": body[]{
+        children[]{
+          'length': length(text)
+        }
+      },
     }`
   );
 }

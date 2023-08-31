@@ -8,6 +8,7 @@ export type Post = {
   bannerUrl?: string,
   body: PortableTextBlock,
   abstract: string,
+  publishedAt: string
 }
 
 export default defineType({
@@ -64,7 +65,6 @@ export default defineType({
       name: 'publishedAt',
       title: 'Published at',
       type: 'datetime',
-      hidden: true,
     }),
     defineField({
       name: 'body',
@@ -79,7 +79,9 @@ export default defineType({
       validation: Rule => Rule.required().warning('Missing abstract text').max(150).warning('Abstract should be max 150 characters'),
     }),
   ],
-
+  initialValue: {
+    publishedAt: Date()
+  },
   preview: {
     select: {
       title: 'title',
