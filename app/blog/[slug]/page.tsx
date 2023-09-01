@@ -1,15 +1,13 @@
 import { getPost } from "@/sanity.query"
 import Image from 'next/image';
-import { PortableText, PortableTextComponent } from '@portabletext/react';
+import { PortableText } from '@portabletext/react';
 import { notFound } from 'next/navigation';
 import DefaultLayout from "@/app/layouts/DefaultLayout";
-import { Post } from "@/schemas/post";
 import BlogProgressBar from "@/app/components/BlogProgressBar";
+import RelatedPosts from "@/app/components/RelatedPosts";
 
-export default async function Article({ params }: { params: { slug: string } }) {
-
-    const post: Post = await getPost(params.slug);
-
+export default async function Article({ params }: {params: {slug: string}}) {
+    const {post, relatedPosts} = await getPost(params.slug);
     if (!post) return notFound();
     
     return <DefaultLayout>
@@ -21,5 +19,14 @@ export default async function Article({ params }: { params: { slug: string } }) 
         <div className="blog-article px-4 max-w-5xl m-auto py-16">
             <PortableText value={post.body}/>
         </div>
+        <RelatedPosts posts={relatedPosts}/>
     </DefaultLayout>
+}
+
+export async function generateMetadata({params}: {params: {slug: string}}) {
+    const {post, relatedPosts} = await getPost(params.slug);
+
+    return {
+        title: `${post?.title} | L'Atelier 3.0`,
+    }
 }

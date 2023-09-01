@@ -1,50 +1,52 @@
 import { groq } from "next-sanity";
 import client from "@/sanity.client";
+import { Post } from "./schemas/post";
+import { cache } from "react";
 
-export async function getPosts() {
+export const revalidate = 60 * 60 * 1; // 1 hour
+
+export const getPosts = cache(async () => {
   return await client.fetch(
     groq`*[_type == "post"]{
-      _id,
-      title,
-      "slug": slug.current,
-      tags,
-      abstract,
-      "imageUrl": mainImage.asset->url,
-      publishedAt,
-      "bodyLengths": body[]{
-        children[]{
-          'length': length(text)
-        }
-      },
-    }`
+    _id,
+    title,
+    "slug": slug.current,
+    tags,
+    abstract,
+    "imageUrl": mainImage.asset->url,
+    publishedAt,
+    "bodyLengths": body[]{
+      children[]{
+        'length': length(text)
+      }
+    },
+  }`
   );
-}
+});
 
-export async function getPost(slug: string) {
-  const post = await client.fetch(
-    groq`*[_type == "post" && slug.current == $slug]{
+export const getPost = cache(
+  async (slug: string): Promise<{ post?: Post; relatedPosts?: Post[] }> => {
+    return await client.fetch(
+      groq`*[_type == "post" && slug.current == $slug][0]{
+      "post": {
         _id,
         title,
+        body,
         "slug": slug.current,
         tags,
-        body,
-        "bannerUrl": bannerImage.asset->url
-      }`,
-    {
-      slug,
-    }
-  );
-
-  return post[0];
-}
-
-export async function getServices() {
-  return await client.fetch(
-    groq`*[_type == "service"]{
-      _id,
-      title,
-      "image": image.asset->url,
-      body,
-    }`
-  );
-}
+        "bannerUrl": bannerImage.asset->url,
+      },
+      "relatedPosts": *[_type == "post" && _id != ^._id && count(tags[][@ in ^.tags]) > 0] | order(count(tags[][@ in ^.tags]) desc) [0...3] {
+        title,
+        abstract,
+        "imageUrl": mainImage.asset->url,
+        "slug": slug.current,
+        tags
+      }
+    }`,
+      {
+        slug,
+      }
+    );
+  }
+);
