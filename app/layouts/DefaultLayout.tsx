@@ -10,7 +10,7 @@ export default function DefaultLayout({ children }: Props) {
   return (
     <>
       <Header />
-      <main className='flex-1'>{children}</main>
+      <main className='flex-1 flex flex-col'>{children}</main>
       <Footer />
     </>
   )
