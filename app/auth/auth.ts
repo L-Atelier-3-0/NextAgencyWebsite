@@ -13,8 +13,6 @@ export const authOptions: NextAuthOptions = {
         password: { label: "Mot de passe", type: "password" },
       },
       async authorize(credentials) {
-        console.log(credentials);
-        
         if(!(credentials?.username === process.env.ADMIN_USERNAME && credentials?.password === process.env.ADMIN_PASSWORD)) return null;
         return { id: "1", name: "Administrateur" };
       },
@@ -22,6 +20,6 @@ export const authOptions: NextAuthOptions = {
   ],
   pages: {
     signIn: "/auth/signin",
-    // signOut: "/auth/signout",
+    signOut: "/auth/signout",
   }
 };

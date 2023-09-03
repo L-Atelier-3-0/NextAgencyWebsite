@@ -3,6 +3,8 @@ import Link from "next/link";
 import React from "react";
 import ButtonPrimary from "./Buttons/ButtonPrimary";
 import { getServerSession } from "next-auth";
+import { TbLogout } from 'react-icons/tb';
+import SignoutButton from "./Buttons/SignoutButton";
 
 export default async function Header() {
   const session = await getServerSession();
@@ -27,7 +29,7 @@ export default async function Header() {
             Réalisations
           </Link>
           <ButtonPrimary>
-            <Link href={"/#services"} title="Services">
+            <Link href={"mailto:latelierduweb30@gmail.com"} title="Contact">
               Contact
             </Link>
           </ButtonPrimary>
@@ -38,9 +40,7 @@ export default async function Header() {
                   Studio
                 </Link>
               </ButtonPrimary>
-              <Link href={"/api/auth/signout"} title="Déconnexion">
-                Déconnexion
-              </Link>
+              <SignoutButton />
             </>
           )}
         </div>
