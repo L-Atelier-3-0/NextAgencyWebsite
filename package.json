@@ -6,8 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "push": "git add . && git commit -m $msg && git push"
+    "lint": "next lint"
   },
   "dependencies": {
     "@portabletext/react": "^3.0.7",

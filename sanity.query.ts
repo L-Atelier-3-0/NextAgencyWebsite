@@ -31,7 +31,14 @@ export const getPost = cache(
       "post": {
         _id,
         title,
-        body,
+        "body": body[]{
+          ...,
+          ...select(
+            _type == "image" => {
+              "asset": asset->
+            } 
+          ),
+        },
         "slug": slug.current,
         tags,
         "bannerUrl": bannerImage.asset->url,
