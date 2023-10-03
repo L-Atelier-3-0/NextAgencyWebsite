@@ -41,7 +41,7 @@ export const getPost = cache(
         },
         "slug": slug.current,
         tags,
-        "bannerUrl": bannerImage.asset->url,
+        faqs[]->{question, answer},
       },
       "relatedPosts": *[_type == "post" && _id != ^._id && count(tags[][@ in ^.tags]) > 0] | order(count(tags[][@ in ^.tags]) desc) [0...3] {
         title,
@@ -49,7 +49,7 @@ export const getPost = cache(
         "imageUrl": mainImage.asset->url,
         "slug": slug.current,
         tags
-      }
+      },
     }`,
       {
         slug,

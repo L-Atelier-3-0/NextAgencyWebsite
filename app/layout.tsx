@@ -1,19 +1,21 @@
-import './globals.css'
-import type { Metadata } from 'next'
+import Head from "next/head";
+import "./globals.css";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: `L'Atelier 3.0`,
-  description: 'Agence digitale spécialisée dans la création de sites web et le référencement.',
-}
+  description:
+    "Agence digitale spécialisée dans la création de sites web et le référencement.",
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="fr">
-      <body className='flex flex-col min-h-full'>{children}</body>
+      <body className="flex flex-col min-h-full">{children}</body>
     </html>
-  )
+  );
 }

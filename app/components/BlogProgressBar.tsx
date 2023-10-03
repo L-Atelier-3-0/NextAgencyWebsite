@@ -6,13 +6,16 @@ export default function BlogProgressBar() {
     const [progress, setProgress] = React.useState(0);
 
     useEffect(() => {
-        window.addEventListener('scroll', () => {
-            const scrollable = document.documentElement.scrollHeight - window.innerHeight;
-            const scrolled = window.scrollY;
-            setProgress(scrolled / scrollable * 100);
-        })
+        window.addEventListener('scroll', handleScroll)
 
-        return () => window.removeEventListener('scroll', () => {})
+        function handleScroll(){
+            const scrollable = document.querySelector('.blog-article')!.getBoundingClientRect().height - innerHeight;
+            const scrolled = window.scrollY;
+
+            setProgress(scrolled / scrollable * 100);
+        }
+
+        return () => window.removeEventListener('scroll', handleScroll)
     }, [])
 
     return (

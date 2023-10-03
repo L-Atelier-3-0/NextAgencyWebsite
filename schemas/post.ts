@@ -1,4 +1,5 @@
 import {defineField, defineType, PortableTextBlock, Image} from 'sanity'
+import { FAQ } from './faq'
 
 export type Post = {
   title: string,
@@ -8,7 +9,8 @@ export type Post = {
   bannerUrl?: string,
   body: PortableTextBlock,
   abstract: string,
-  publishedAt: string
+  publishedAt: string,
+  faqs: FAQ[]
 }
 
 export default defineType({
@@ -48,18 +50,10 @@ export default defineType({
       },
     }),
     defineField({
-      name: 'bannerImage',
-      title: 'Banner image',
-      type: 'image',
-      options: {
-        hotspot: true,
-      },
-    }),
-    defineField({
-      name: 'categories',
-      title: 'Categories',
+      name: 'faqs',
+      title: 'FAQs',
       type: 'array',
-      of: [{type: 'reference', to: {type: 'category'}}],
+      of: [{type: 'reference', to: {type: 'faq'}}],
     }),
     defineField({
       name: 'publishedAt',

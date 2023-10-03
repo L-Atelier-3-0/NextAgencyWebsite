@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import DefaultLayout from "@/app/layouts/DefaultLayout";
 import BlogProgressBar from "@/app/components/BlogProgressBar";
 import RelatedPosts from "@/app/components/RelatedPosts";
+import FAQs from "@/app/components/FAQs";
 
 const components = {
   block: {
@@ -15,13 +16,13 @@ const components = {
   },
   types: {
     image: (props: any) => (
-      <div className="max-h-[500px] overflow-hidden">
+      <div className="max-h-[500px] overflow-hidden rounded-lg">
         <Image
           src={props.value.asset.url}
           alt={props.value.alt}
           width={props.value.asset.metadata.dimensions.width}
           height={props.value.asset.metadata.dimensions.height}
-          className="rounded-lg object-contain h-full"
+          className="object-contain h-full"
         />
       </div>
     ),
@@ -38,6 +39,7 @@ export default async function Article({
   params: { slug: string };
 }) {
   const { post, relatedPosts } = await getPost(params.slug);
+  
   if (!post) return notFound();
 
   return (
@@ -47,6 +49,7 @@ export default async function Article({
         <h1 className="text-6xl lg:text-7xl font-black">{post.title}</h1>
         <PortableText components={components} value={post.body} />
       </div>
+      <FAQs faqs={post.faqs}/>
       <RelatedPosts posts={relatedPosts} />
     </DefaultLayout>
   );

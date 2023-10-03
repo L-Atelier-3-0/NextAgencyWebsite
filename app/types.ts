@@ -7,7 +7,8 @@ type ServiceCard = {
 type TeamMember = {
     name: string,
     content: string,
-    image: string
+    image: string,
+    role: string
 }
 
 type WhyUsCard = {
